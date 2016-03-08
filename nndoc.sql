@@ -83,6 +83,25 @@ CREATE TABLE `nnd_doc_user` (
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
+
+CREATE TABLE `nnd_doc_log` (
+
+`id` INT NOT NULL AUTO_INCREMENT ,
+
+`action` VARCHAR(200) NOT NULL DEFAULT '0' COMMENT '操作名称' ,
+
+`uid` INT NOT NULL DEFAULT '0'  COMMENT '用户uid'  ,
+
+`ctime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+
+ `mtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+
+ `action_name` VARCHAR(200) NOT NULL DEFAULT '0' COMMENT '动作名称',
+
+PRIMARY KEY (`id`)
+
+  ) ENGINE = InnoDB COMMENT = '用户操作记录表';
+
 --
 -- 转存表中的数据 `nnd_doc_user`
 --
