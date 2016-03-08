@@ -131,7 +131,7 @@ class tr_db{
         self::getAdapter()->exec($sql);
         $lastInsertId = self::getAdapter()->lastInsertId();
         self::$_sql[] = $sql;
-        
+        tr_log::debug($lastInsertId,"insert result");
         return $lastInsertId;
     }
 

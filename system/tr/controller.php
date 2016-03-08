@@ -29,12 +29,14 @@ class tr_controller{
             }
         }
         $param = array_merge(self::$_variable,$param);
-        echo self::tpl()->render($path, $param);
+        $html = self::tpl()->render($path, $param);
         $debug = self::getParam("debug");
         $debugValue=tr::config()->get("app.debug_value");
         if($debug==$debugValue){
-            tr_log::getJsDebug();
+            $debugStr = tr_log::getJsDebug(0);
+            $html = preg_replace("/\<\/body\>/i",$debugStr.'</body>',$html);
         }
+        echo $html;
     }
 
 

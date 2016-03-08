@@ -39,21 +39,29 @@ class tr_log{
         return gethostbyname($_SERVER['HOSTNAME']);
     }
 
-    static function getJsDebug(){
+    static function getJsDebug($isShow=1){
         $debug = self::getDebug();
         $str = "<script>";
         if($debug){
             foreach($debug as $k=>$v){
                 if(is_string($v)){
-                    $v = str_replace("'","\"",$v);
-                    $str .= "console.log('".$k."-".$v."');";
+                    $v = str_replace("\n","",$v);
+                    $v = addslashes($v);
+                    $str .= "console.log('[".$k."]-".$v."');\r\n";
                 }else{
-                    $str .= "console.log('".$k."-".json_encode($v)."');";
+                    $v= json_encode($v);
+                    $v = str_replace("\n","",$v);
+                    $v = addslashes($v);
+                    $str .= "console.log('[".$k."]-".$v."');\r\n";
                 }
             }
         }
         $str .="</script>";
-        echo $str;
+        if($isShow){
+            echo $str;
+        }else{
+            return $str;
+        }
     }
 }
 

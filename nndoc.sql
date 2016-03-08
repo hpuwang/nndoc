@@ -100,7 +100,7 @@ CREATE TABLE `nnd_doc_log` (
 
 PRIMARY KEY (`id`)
 
-  ) ENGINE = InnoDB COMMENT = '用户操作记录表';
+  ) ENGINE = InnoDB CHARSET=utf8 COMMENT = '用户操作记录表';
 
 --
 -- 转存表中的数据 `nnd_doc_user`
