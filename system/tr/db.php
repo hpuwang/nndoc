@@ -122,11 +122,10 @@ class tr_db{
 
         $keys = array_keys($data);
         $sql = "INSERT INTO " . $tableName . "(" . implode(',', $keys) . ")
-                VALUES(:" . implode(', :', $keys) . ") ";
-
+                VALUES(:" . implode(':, :', $keys) . ":) ";
         foreach ($data as $k => $v) {
             $v = self::getAdapter()->quote($v);
-            $sql = str_replace(":" . $k, $v, $sql);
+            $sql = str_replace(":" . $k.":", $v, $sql);
         }
 
         self::getAdapter()->exec($sql);
@@ -150,12 +149,12 @@ class tr_db{
         }
         $keys = array_keys($data);
         $sql = "INSERT INTO " . $tableName . "(" . implode(',', $keys) . ")
-                VALUES(:" . implode(', :', $keys) . ")
+                VALUES(:" . implode(':, :', $keys) . ":)
                 ON DUPLICATE KEY UPDATE " . $whereSql;
 
         foreach ($data as $k => $v) {
             $v = self::getAdapter()->quote($v);
-            $sql = str_replace(":" . $k, $v, $sql);
+            $sql = str_replace(":" . $k.":", $v, $sql);
         }
 
         self::getAdapter()->exec($sql);

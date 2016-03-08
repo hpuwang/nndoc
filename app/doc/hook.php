@@ -12,3 +12,9 @@ tr_hook::add("route_start",function(){
         redirect(url('doc_controller_user@login'));
     }
 });
+//日志记录
+tr_hook::add("route_start",function(){
+    $dao = new doc_dao_log();
+    $dao->addLog();
+});
+
