@@ -31,6 +31,6 @@ return array(
     "auth_key"=>"wetree@34234!(*&^><wwww",
     "error404_tpl"=>"error404",
     "msg_tpl"=>"msg",
-    "is_write"=>1,
+    "is_write"=>0,
     "rand_job"=>0.3
 );
