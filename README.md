@@ -1,4 +1,5 @@
 1.restfull模式
+```
 config/app.php 里面配置
  "apps"=>array("doc","restfull"),
   "reset_apps"=>array("restfull"),
@@ -6,7 +7,7 @@ config/app.php 里面配置
   就要配置
    "apps"=>array("test"),
     "reset_apps"=>array("test"),
-```
+
 网址规则
 	例如: http://xxx/bscreen/i100/goos/detail
 	(a)、返回参数: {“body”:{},”elapsedTime”=>"","errorCode"=>0,"errorDesc"=>"成功"}
