@@ -1,0 +1,15 @@
+sudo apt-get update
+sudo apt-get install lamp-server^
+sudo a2enmod rewrite
+sudo service apache2 restart
+sudo apt-get install -y php5-memcached
+sudo apt-get install -y php5-dev
+sudo apt-get install -y redis-server
+sudo apt-get install -y memcached
+sudo apt-get install -y php-pear
+sudo curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+sudo chmod 0777 /usr/local/bin/composer
+sudo pecl install redis
+
+
