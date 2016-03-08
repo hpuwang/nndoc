@@ -85,7 +85,7 @@ class doc_controller_user extends tr_controller{
             $checkByNickname = $dao->getByNickname($nickname,$userInfo['id']);
             if($checkByNickname)  return $this->response("",tr_const::ERROR_NORMAL,"昵称已存在!");
 
-            $dao->mpwd($userInfo['id'],$pwd,$nickname);
+            $dao->mpwd($userInfo['id'],$npwd,$nickname);
 
             $service->setLogin(array());
 
