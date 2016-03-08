@@ -22,6 +22,32 @@ class doc_controller_project extends tr_controller{
         $this->display();
     }
 
+
+    function edit($projectId){
+        if(!$projectId) return redirect(url("doc_controller_index@index"));
+        $obj = new doc_dao_project();
+        $info = $obj->getById($projectId);
+
+        if(isPost()){
+            $name = $this->getParam("name");
+            $content = $this->getParam("content");
+            if(!$name) return $this->response("",tr_const::ERROR_NORMAL,"项目名称不能为空!");
+
+            $obj = new doc_dao_project();
+            $check = $obj->getByName($name,$projectId);
+            if($check) return $this->response("",tr_const::ERROR_NORMAL,"项目名称已存在!");
+
+            if(!$content) return $this->response("",tr_const::ERROR_NORMAL,"项目描叙不能为空!");
+
+            $obj->edit($name,$content,$projectId);
+            return $this->response("",tr_const::SUCCESS_OK,"操作成功",url('doc_controller_index@index'));
+        }
+        $this->title="编辑";
+        $this->info = $info;
+        $this->display();
+    }
+
+
     function index($projectId){
         if(!$projectId) return redirect(url("doc_controller_index@index"));
         $obj = new doc_dao_project();

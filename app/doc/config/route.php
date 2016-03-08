@@ -13,4 +13,5 @@ return array(
     "/user/add"=>array("doc_controller_user@add","用户添加","用户"),
     "/user/muser"=>array("doc_controller_user@muser","修改用户信息","用户"),
     "/delapi-:number"=>array("doc_controller_project@delApi","删除api文档","项目"),
+    "/editproject-:number"=>array("doc_controller_project@edit","编辑","项目"),
 );

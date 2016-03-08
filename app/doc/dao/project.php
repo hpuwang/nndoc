@@ -16,8 +16,26 @@ class doc_dao_project extends tr_db{
         return true;
     }
 
+    function edit($name,$content,$id){
+        $data = array();
+        $data['name'] = $name;
+        $data['descr'] = $content;
+        $data['mtime'] = date('Y-m-d H:i:s');
+        self::update($data,array("id"=>$id));
+        return true;
+    }
+
     function getById($id){
         return self::get(array("id"=>$id));
+    }
+
+    function getByName($name,$id=0){
+        $data= array();
+        $data['name']=$name;
+        if($id){
+            $data['id']=array("!=",$id);
+        }
+        return self::get($data);
     }
 
 

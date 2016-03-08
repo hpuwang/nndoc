@@ -34,7 +34,7 @@
             <span class="icon-bar"></span>
         </button>
         <!-- 品牌名称或logo -->
-        <a class="navbar-brand" href="#">牛牛API文档系统<?php echo $this->section('brand') ?></a>
+        <a class="navbar-brand" href="<?php echo $this->url("doc_controller_index@index"); ?>">牛牛API文档系统<?php echo $this->section('brand') ?></a>
     </div>
 
     <!-- 导航项目 -->

@@ -49,6 +49,11 @@ endif;
 </div>
 <div class="col-md-10">
     <div id="editormd-view" >
+        <dl class="dl-inline">
+            <?php if($user): ?>
+                <dd><a href="<?php echo $this->url('doc_controller_project@edit',$info['id']); ?>">编辑</a></dd>
+            <?php endif;?>
+        </dl>
         <textarea style="display:none;"><?php echo $info['descr']; ?></textarea>
     </div>
 </div>
