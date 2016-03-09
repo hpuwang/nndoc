@@ -44,7 +44,7 @@ class tr{
         $resetApps = tr::config()->get("app.reset_apps");
         $pathInfo = tr::getPath();
         $pathInfoArr = explode("/",trim($pathInfo,"/"));
-        if(count($pathInfoArr)<4) return "";
+        if(count($pathInfoArr)<3) return "";
         $app1 = $pathInfoArr[0];
         if(in_array($app1,$resetApps)) return $app1;
         $app1 = $pathInfoArr[0]."/".$pathInfoArr[1];

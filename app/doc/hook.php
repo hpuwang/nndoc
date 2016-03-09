@@ -9,7 +9,7 @@ tr_hook::add("route_start",function(){
     $obj = new doc_service_user();
     $loginInfo = $obj->checkLogin();
     if(!$loginInfo){
-        redirect(url('doc_controller_user@login'));
+//        redirect(url('doc_controller_user@login'));
     }
 });
 //日志记录

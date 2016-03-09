@@ -155,7 +155,6 @@ class tr_route{
         $resetApps = tr::config()->get("app.reset_apps");
 
         $reset = tr::getReset();
-
         foreach($apps as $apk){
             $fpath = ROOT_PATH."/app/".$apk."/config/route.php";
             if(is_file($fpath)){

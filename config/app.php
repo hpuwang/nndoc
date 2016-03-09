@@ -1,9 +1,9 @@
 <?php
 return array(
     "namespaces" => array('tr'),
-    "apps_namespaces" => array('doc','admin'),
-    "apps"=>array("doc",'admin'),
-    "reset_apps"=>array(),
+    "apps_namespaces" => array('doc','admin','test'),
+    "apps"=>array("doc",'admin','test'),
+    "reset_apps"=>array('test'),
     "session"=>array("timeout"=>3600*12),
     "tpl_skin"=>"default",//皮肤
     "page_size"=>10,
