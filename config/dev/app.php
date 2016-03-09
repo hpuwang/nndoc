@@ -2,7 +2,7 @@
 return array(
     "debug" => true,
     "db" => array("default"=>array(
-        "auto_time" => false,
+        "auto_time" => true,
         "prefix" => "nnd_",
         "encode" => "",
         "master"=> array(
