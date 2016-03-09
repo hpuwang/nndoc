@@ -484,7 +484,7 @@ function get_client_ip($type = 0) {
 function get_server_ip(){
     if(!empty($_SERVER['SERVER_ADDR']))
         return $_SERVER['SERVER_ADDR'];
-    return gethostbyname($_SERVER['HOSTNAME']);
+    return gethostbyname(isset($_SERVER['HOSTNAME'])?$_SERVER['HOSTNAME']:"unknow");
 }
 
 function throwException($msg){
