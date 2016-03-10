@@ -21,15 +21,15 @@
                     <legend>创建接口文档</legend>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">标题</label>
+                        <label class="col-md-1 control-label">标题</label>
                         <div class="col-md-2">
                             <input type="text" name="title"  value="" class="form-control" data-rule="标题: required;title">
                         </div>
-                        <label class="col-md-2 control-label">排序</label>
+                        <label class="col-md-1 control-label">排序</label>
                         <div class="col-md-2">
                             <input type="text" name="fsort"  value="0" class="form-control" data-rule="排序: required;fsort">
                         </div>
-                        <label class="col-md-2 control-label">组</label>
+                        <label class="col-md-1 control-label">组</label>
                         <div class="col-md-2">
                             <?php
                             if($group):
