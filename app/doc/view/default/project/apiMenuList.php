@@ -1,8 +1,8 @@
 <?php if($list):?>
-<nav class="menu navb" data-toggle="menu" style="padding-left: 10px;">
+<nav class="menu" data-toggle="menu" style="padding-left: 10px;">
     <ul class="nav nav-primary">
         <?php foreach($list as  $value): ?>
-        <li class="active show nav-parent">
+        <li class=" show nav-parent">
             <a href="javascript:;"><?php echo $value['name']; ?>
                 <i class="icon-chevron-right nav-parent-fold-icon"></i><i class="icon-chevron-right nav-parent-fold-icon"></i>
             </a>

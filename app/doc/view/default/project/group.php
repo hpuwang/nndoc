@@ -25,7 +25,7 @@
                         <?php endforeach; ?>
                     <?php endif;?>
                     <div class="col-md-4 col-sm-6 col-lg-3">
-                        <a href="<?php echo $this->url("doc_controller_project@addGroup"); ?>" class="card">
+                        <a href="<?php echo $this->url("doc_controller_project@addGroup",$info['id']); ?>" class="card">
                             <h5 class="card-heading">+</h5>
                         </a>
                     </div>
