@@ -2,50 +2,13 @@
 <?php $this->start('title') ?><?php echo $this->e($title) ?><?php $this->stop() ?>
 <?php $this->start('brand') ?><a  class="navbar-brand" href="<?php echo $this->url("doc_controller_project@index",$info['id']); ?>"><?php echo $this->e($info['name']) ?></a><?php $this->stop() ?>
 <?php $this->start('left-menu'); ?>
-<?php
-$obj = new doc_service_user();
-$user = $obj->getLogin();
-if($user):
-?>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i></a>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo $this->url("doc_controller_project@addApi",$info['id']);  ?>">接口文档</a></li>
-            <li><a href="<?php echo $this->url("doc_controller_project@addStruct",$info['id']);  ?>">结构体</a></li>
-        </ul>
-    </li>
-<?php
-endif;
-?>
+<?php echo tr_hook::fire("api_top_menu",$info['id']);?>
 <?php $this->stop();?>
 <?php $this->start('right-menu'); ?>
 <?php $this->stop();?>
 <?php $this->start('main'); ?>
 <div class="col-md-2">
-    <nav class="menu navb" data-toggle="menu" style="padding-left: 10px;">
-        <ul class="nav nav-primary">
-            <li class="active show nav-parent">
-                <a href="javascript:;">接口文档<i class="icon-chevron-right nav-parent-fold-icon"></i><i class="icon-chevron-right nav-parent-fold-icon"></i></a>
-                <ul class="nav">
-                    <?php if($apiDoc):?>
-                    <?php foreach($apiDoc as $v):?>
-                    <li <?php if($id == $v['id']) echo 'class="active"'; ?>><a href="<?php echo $this->url("doc_controller_project@view",$v['id']); ?>"><i class="icon-caret-right"></i> <?php echo $v['title']; ?></a></li>
-                            <?php endforeach;?>
-                    <?php endif;?>
-                </ul>
-            </li>
-            <li class="active show nav-parent">
-                <a href="javascript:;">结构体<i class="icon-chevron-right nav-parent-fold-icon"></i><i class="icon-chevron-right nav-parent-fold-icon"></i></a>
-                <ul class="nav">
-                    <?php if($structDoc):?>
-                        <?php foreach($structDoc as $v):?>
-                            <li <?php if($id == $v['id']) echo 'class="active"'; ?>><a href="<?php echo $this->url("doc_controller_project@view",$v['id']); ?>"><i class="icon-caret-right"></i> <?php echo $v['title']; ?></a></li>
-                        <?php endforeach;?>
-                    <?php endif;?>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <?php echo tr_hook::fire("api_list",array($info['id'],$apiInfo['id'])); ?>
 </div>
     <div class="col-md-10">
         <div class="row">
@@ -57,7 +20,10 @@ endif;
                             <dl class="dl-inline">
                                 <dt>最后处理时间：</dt>
                                 <dd><?php echo $apiInfo['mtime']; ?></dd>
-                                <?php if($user): ?>
+                                <?php
+                                $obj = new doc_service_user();
+                                $user = $obj->getLogin();
+                                if($user): ?>
                                 <dd><a href="<?php echo $this->url('doc_controller_project@editApi',$apiInfo['id']); ?>">编辑</a></dd>
                                     <dd><a href="<?php echo $this->url('doc_controller_project@delApi',$apiInfo['id']); ?>">删除</a></dd>
                                 <?php endif;?>

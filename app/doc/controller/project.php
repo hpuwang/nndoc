@@ -70,9 +70,6 @@ class doc_controller_project extends tr_controller{
         $obj = new doc_dao_project();
         $info = $obj->getById($projectId);
 
-        $this->apiDoc = $apiobj->getAllApi($projectId,0);
-        $this->structDoc = $apiobj->getAllApi($projectId,1);
-
         $this->title = $apiInfo['title']."-".$info['name'];
         $this->info = $info;
         $this->apiInfo = $apiInfo;
@@ -87,15 +84,17 @@ class doc_controller_project extends tr_controller{
             $title = $this->getParam("title");
             $fsort = (int) $this->getParam("fsort");
             $content = $this->getParam("content");
+            $group = $this->getParam("group");
 
             if(!$title) return $this->response("",tr_const::ERROR_NORMAL,"标题不能为空!");
             if(!$content) return $this->response("",tr_const::ERROR_NORMAL,"文档内容不能为空!");
+            if(!$group) return $this->response("",tr_const::ERROR_NORMAL,"所在组不能为空,请去添加!",url("doc_controller_project@addGroup",$projectId));
 
             $userService = new doc_service_user();
             $userInfo = $userService->getLogin();
 
             $obj = new doc_dao_api();
-            $check = $obj->addDoc($title,$content,$projectId,$userInfo['id'],0,$fsort);
+            $check = $obj->addDoc($title,$content,$projectId,$userInfo['id'],$group,$fsort);
             return $this->response("",tr_const::SUCCESS_OK,"操作成功!",url("doc_controller_project@view",$check));
         }
 
@@ -103,34 +102,57 @@ class doc_controller_project extends tr_controller{
         $info = $obj->getById($projectId);
         $this->title = $info['name']."-api文档添加";
         $this->info = $info;
+
+        $groupDao = new doc_dao_group();
+        $this->group = $groupDao->gets(array("pid"=>$projectId));
+
         $this->pid = $projectId;
         $this->display();
 
     }
 
-    function addStruct($projectId){
+    function addGroup($projectId){
         if(!$projectId) return redirect(url("doc_controller_index@index"));
 
         if(isPost()){
-            $title = $this->getParam("title");
+            $title = $this->getParam("name");
             $fsort = (int) $this->getParam("fsort");
-            $content = $this->getParam("content");
 
-            if(!$title) return $this->response("",tr_const::ERROR_NORMAL,"标题不能为空!");
-            if(!$content) return $this->response("",tr_const::ERROR_NORMAL,"文档内容不能为空!");
-
-            $userService = new doc_service_user();
-            $userInfo = $userService->getLogin();
-
-            $obj = new doc_dao_api();
-            $check = $obj->addDoc($title,$content,$projectId,$userInfo['id'],1,$fsort);
-            return $this->response("",tr_const::SUCCESS_OK,"操作成功!",url("doc_controller_project@view",$check));
+            if(!$title) return $this->response("",tr_const::ERROR_NORMAL,"名称不能为空!");
+            $obj = new doc_dao_group();
+            $check = $obj->addGroup($title,$projectId,$fsort);
+            return $this->response("",tr_const::SUCCESS_OK,"操作成功!",url("doc_controller_project@group",$projectId));
         }
 
         $obj = new doc_dao_project();
         $info = $obj->getById($projectId);
         $this->title = $info['name'];
         $this->info = $info;
+        $this->pid = $projectId;
+        $this->display();
+    }
+
+
+    function editGroup($id){
+        if(!$id) return redirect(url("doc_controller_index@index"));
+        $obj = new doc_dao_group();
+        $ginfo = $obj->getById($id);
+        $projectId = $ginfo['pid'];
+        if(isPost()){
+            $name = $this->getParam("name");
+            $fsort = (int) $this->getParam("fsort");
+
+            if(!$name) return $this->response("",tr_const::ERROR_NORMAL,"名称不能为空!");
+            $obj = new doc_dao_group();
+            $obj->editGroup($name,$fsort,$id);
+            return $this->response("",tr_const::SUCCESS_OK,"操作成功!",url("doc_controller_project@group",$projectId));
+        }
+
+        $obj = new doc_dao_project();
+        $this->info = $obj->getById($projectId);
+
+        $this->title = $ginfo['name'];
+        $this->ginfo = $ginfo;
         $this->pid = $projectId;
         $this->display();
     }
@@ -144,19 +166,24 @@ class doc_controller_project extends tr_controller{
             $title = $this->getParam("title");
             $fsort = (int) $this->getParam("fsort");
             $content = $this->getParam("content");
+            $group = $this->getParam("group");
 
             if(!$title) return $this->response("",tr_const::ERROR_NORMAL,"标题不能为空!");
             if(!$content) return $this->response("",tr_const::ERROR_NORMAL,"文档内容不能为空!");
 
 
             $obj = new doc_dao_api();
-            $obj->editDoc($title,$content,$fsort,$id);
+            $obj->editDoc($title,$content,$fsort,$group,$id);
             return $this->response("",tr_const::SUCCESS_OK,"操作成功!",url("doc_controller_project@view",$id));
         }
         $projectId = $apiInfo['pid'];
         $obj = new doc_dao_project();
         $this->info = $obj->getById($projectId);
         $this->title = $apiInfo['title'];
+
+        $groupDao = new doc_dao_group();
+        $this->group = $groupDao->gets(array("pid"=>$projectId));
+
         $this->display();
     }
 
@@ -169,5 +196,15 @@ class doc_controller_project extends tr_controller{
         redirect(url("doc_controller_project@index",$apiInfo['pid']));
     }
 
+
+    function group($projectId){
+        if(!$projectId) return redirect(url("doc_controller_index@index"));
+        $obj = new doc_dao_project();
+        $this->info = $obj->getById($projectId);
+        $dao = new doc_dao_group();
+        $this->list = $dao->gets(array("pid"=>$projectId),"fsort asc");
+        $this->title = "组管理";
+        $this->display();
+    }
 
 }

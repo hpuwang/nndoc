@@ -5,21 +5,7 @@
 <?php $this->start('title') ?><?php echo $this->e($title) ?><?php $this->stop() ?>
 <?php $this->start('brand') ?><a  class="navbar-brand" href="<?php echo $this->url("doc_controller_project@index",$info['id']); ?>"><?php echo $this->e($info['name']) ?></a><?php $this->stop() ?>
 <?php $this->start('left-menu'); ?>
-<?php
-$obj = new doc_service_user();
-$user = $obj->getLogin();
-if($user):
-    ?>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i></a>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo $this->url("doc_controller_project@addApi",$info['id']);  ?>">接口文档</a></li>
-            <li><a href="<?php echo $this->url("doc_controller_project@addStruct",$info['id']);  ?>">结构体</a></li>
-        </ul>
-    </li>
-    <?php
-endif;
-?>
+<?php echo tr_hook::fire("api_top_menu",$info['id']);?>
 <?php $this->stop();?>
 <?php $this->start('right-menu'); ?>
 <?php $this->stop();?>
@@ -36,12 +22,29 @@ endif;
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">标题</label>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <input type="text" name="title"  value="<?php echo $apiInfo['title'];?>" class="form-control" data-rule="标题: required;title">
                         </div>
                         <label class="col-md-2 control-label">排序</label>
                         <div class="col-md-2">
                             <input type="text" name="fsort"  value="<?php echo $apiInfo['fsort'];?>" class="form-control" data-rule="排序: required;fsort">
+                        </div>
+                        <label class="col-md-2 control-label">组</label>
+                        <div class="col-md-2">
+                            <?php
+                            if($group):
+                                ?>
+                                <select name="group" class="form-control">
+                                <?php
+                                foreach($group as $v):
+                            ?>
+                                <option <?php echo $v['id']==$apiInfo['gid']?"selected":""; ?> value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
+                            <?php
+                            endforeach;
+                            ?>
+                                </select>
+                            <?php
+                            endif;?>
                         </div>
                     </div>
 

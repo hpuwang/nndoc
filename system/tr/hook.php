@@ -24,7 +24,7 @@ class tr_hook
         $instance = self::get_instance();
         if (isset($instance->hooks[$hook_name])) {
             foreach ($instance->hooks[$hook_name] as $fn) {
-                call_user_func_array($fn, array(&$params));
+                return call_user_func_array($fn, array(&$params));
             }
         }
     }
