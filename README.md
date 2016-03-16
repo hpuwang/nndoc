@@ -31,4 +31,9 @@
 
 admin@admin.com/111111a
 
+- 需要服务器支持pathinfo
+
+- nginx 服务器默认不支持
+
+
 
