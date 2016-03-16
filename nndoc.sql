@@ -228,7 +228,7 @@ LOCK TABLES `nnd_doc_user` WRITE;
 
 INSERT INTO `nnd_doc_user` (`id`, `email`, `nickname`, `pwd`, `ctime`, `mtime`)
 VALUES
-	(1,'hpu423@126.com','管理员','49dec5fb8af4eeef7c95e7f5c66c8ae6','2016-03-03 09:22:00','2016-03-03 12:26:53');
+	(1,'admin@admin.com','管理员','49dec5fb8af4eeef7c95e7f5c66c8ae6','2016-03-03 09:22:00','2016-03-03 12:26:53');
 
 /*!40000 ALTER TABLE `nnd_doc_user` ENABLE KEYS */;
 UNLOCK TABLES;
