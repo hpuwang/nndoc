@@ -6,7 +6,7 @@
 
 - 导入nndoc.sql 数据库
 
-- 更改config/dev.app.php 里面的配置
+- 更改config/dev.app.php 里面的配置为你自己的数据库连接信息
 
 ```
 
